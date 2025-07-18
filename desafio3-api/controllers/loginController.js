@@ -27,3 +27,15 @@ exports.rememberPassword = (req, res) => {
     return res.status(404).json({ message: "Usuário não encontrado" });
   }
 };
+
+exports.resetAttempts = (req, res) => {
+  const { username } = req.body;
+  const user = users[username];
+
+  if (user) {
+    user.attempts = 0;
+    return res.status(200).json({ message: "Tentativas resetadas" });
+  } else {
+    return res.status(404).json({ message: "Usuário não encontrado" });
+  }
+};
